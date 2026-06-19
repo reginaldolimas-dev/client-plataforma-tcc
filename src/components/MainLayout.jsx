@@ -67,7 +67,7 @@ function MainLayout() {
           <BookOutlined style={{ color: '#1890ff', fontSize: 22 }} />
           {!collapsed && (
             <span style={{ color: '#fff', fontWeight: 'bold', fontSize: 16, whiteSpace: 'nowrap' }}>
-              Gestão Escolar
+                Plataforma - TCC
             </span>
           )}
         </div>
@@ -94,7 +94,7 @@ function MainLayout() {
               <Avatar style={{ backgroundColor: '#1890ff' }} icon={<UserOutlined />} />
               <div style={{ display: 'flex', flexDirection: 'column', lineHeight: '1.2' }}>
                 <span style={{ fontWeight: '600', color: '#262626' }}>{usuario?.nome || 'Diretor'}</span>
-                <span style={{ fontSize: '11px', color: '#8c8c8c' }}>{usuario?.perfil || 'Administrador'}</span>
+                <span style={{ fontSize: '11px', color: '#8c8c8c' }}>{usuario?.role || 'Administradores'}</span>
               </div>
             </div>
           </Dropdown>

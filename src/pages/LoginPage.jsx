@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Form, Input, Button, Card, Typography, message } from 'antd';
-import { BookOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {Button, Card, Form, Input, message, Typography} from 'antd';
+import {BookOutlined, LockOutlined, UserOutlined} from '@ant-design/icons';
 import useAuth from '@/hooks/useAuth';
 
 const { Title, Text } = Typography;
@@ -56,24 +56,23 @@ function LoginPage() {
             <BookOutlined />
           </div>
           <Title level={3} style={{ margin: 0, color: '#262626' }}>
-            Portal Escolar
+            Plataforma - TCC
           </Title>
           <Text type="secondary">Entre com suas credenciais de acesso</Text>
         </div>
 
         <Form layout="vertical" onFinish={handleSubmit} requiredMark={false}>
           <Form.Item
-            label="E-mail"
-            name="email"
+            label="Usuário"
+            name="usuarioLogin"
             rules={[
-              { required: true, message: 'Por favor, insira seu e-mail!' },
-              { type: 'email', message: 'E-mail inválido!' }
+              { required: true, message: 'Por favor, insira seu usuário!' }
             ]}
           >
             <Input
-              prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+              prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
               size="large"
-              placeholder="exemplo@escola.com"
+              placeholder="seu usuário"
             />
           </Form.Item>
           
@@ -109,7 +108,7 @@ function LoginPage() {
         </Form>
         <div style={{ textAlign: 'center', marginTop: 16 }}>
           <Text type="secondary" style={{ fontSize: '12px' }}>
-            Dica: Digite qualquer e-mail e senha para acessar o modo de demonstração.
+            Dica: Entre com usuário: aluno e senha: aluno para testar o sistema.
           </Text>
         </div>
       </Card>

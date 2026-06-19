@@ -72,7 +72,7 @@ function DashboardPage() {
   return (
     <div>
       <div style={{ marginBottom: 24 }}>
-        <Title level={3} style={{ margin: 0 }}>Dashboard Escolar</Title>
+        <Title level={3} style={{ margin: 0 }}>Dashboard</Title>
         <Text type="secondary">Resumo administrativo do ano letivo de 2026</Text>
       </div>
 
