@@ -3,6 +3,7 @@ import RotaProtegida from '@/routes/RotaProtegida';
 import MainLayout from '@/components/MainLayout';
 import LoginPage from '@/pages/LoginPage';
 import DashboardPage from '@/pages/DashboardPage';
+import CustomerPage from "@/pages/CustomerPage.jsx";
 
 function AppRoutes() {
   return (
@@ -11,6 +12,7 @@ function AppRoutes() {
       <Route element={<RotaProtegida />}>
         <Route element={<MainLayout />}>
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/clientes" element={<CustomerPage />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
