@@ -1,9 +1,9 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import RotaProtegida from '@/routes/RotaProtegida';
 import MainLayout from '@/components/MainLayout';
 import LoginPage from '@/pages/LoginPage';
 import DashboardPage from '@/pages/DashboardPage';
-import CustomerPage from "@/pages/CustomerPage.jsx";
+import CustomerPage from "@/pages/customer/CustomerPage.jsx";
 
 function AppRoutes() {
   return (

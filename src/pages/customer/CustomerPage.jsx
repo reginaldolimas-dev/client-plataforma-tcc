@@ -1,4 +1,7 @@
 import {FiltroCollapse} from "@/components/FiltroCollapse.jsx";
+import {Tabela} from "@/components/Tabela.jsx";
+import {Fragment} from "react";
+import {Col, Row} from "antd";
 
 function CustomerPage() {
 
@@ -17,6 +20,15 @@ function CustomerPage() {
             propriedades: { type: 'number' },
         }
         ]
-    return <FiltroCollapse campos={CAMPOS} />
+    return <Fragment>
+        <Row gutter={[32, 32]}>
+            <Col span={24}>
+                <FiltroCollapse campos={CAMPOS} />
+            </Col>
+            <Col span={24}>
+                <Tabela />
+            </Col>
+        </Row>
+    </Fragment>
 }
 export default CustomerPage;
