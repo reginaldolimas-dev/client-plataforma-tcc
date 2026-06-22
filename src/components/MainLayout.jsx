@@ -23,9 +23,9 @@ const itensMenu = [
     label: 'Dashboard',
   },
   {
-    key: '/alunos',
+    key: '/clientes',
     icon: <TeamOutlined />,
-    label: 'Alunos',
+    label: 'Clientes',
   },
   {
     key: '/turmas',
