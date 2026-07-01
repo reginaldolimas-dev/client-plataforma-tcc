@@ -272,7 +272,7 @@ const FormularioDecorator = forwardRef(
                                     <Button
                                         disabled={desabilitarBotaoLimpar}
                                         danger
-                                        icon={<DeleteOutlined />}
+                                        icon={rest?.botaoLimparProps?.icone || <DeleteOutlined />}
                                         ghost
                                         onClick={onLimpar}
                                         block

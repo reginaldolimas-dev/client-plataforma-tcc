@@ -1,9 +1,16 @@
-import {FiltroCollapse} from "@/components/FiltroCollapse.jsx";
-import {Tabela} from "@/components/Tabela.jsx";
-import {Fragment} from "react";
-import {Col, Row} from "antd";
+import { FiltroCollapse } from "@/components/FiltroCollapse.jsx";
+import { Tabela } from "@/components/Tabela.jsx";
+import { Button, Col, Row } from "antd";
+import { Pagina } from "@/components/Layout/Pagina.jsx";
+import { CustomerModal } from "@/pages/customer/components/CustomerModal.jsx";
+import { useState } from "react";
 
 function CustomerPage() {
+    const [isModalVisible, setModalVisible] = useState(false);
+
+    function aoFechar() {
+        setModalVisible(false);
+    }
 
     const CAMPOS = [
         {
@@ -20,7 +27,7 @@ function CustomerPage() {
             propriedades: { type: 'number' },
         }
         ]
-    return <Fragment>
+    return <Pagina titulo="Pesquisa de Clientes" acoes={<Button onClick={setModalVisible} type={"primary"}>Novo Cliente</Button>}>
         <Row gutter={[32, 32]}>
             <Col span={24}>
                 <FiltroCollapse campos={CAMPOS} />
@@ -29,6 +36,7 @@ function CustomerPage() {
                 <Tabela />
             </Col>
         </Row>
-    </Fragment>
+        <CustomerModal visivel={isModalVisible} aoFechar={aoFechar} />
+    </Pagina>
 }
 export default CustomerPage;

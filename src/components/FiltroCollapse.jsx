@@ -1,5 +1,7 @@
 import { Collapse } from "antd";
 import { Formulario } from "./Formulario/Formulario";
+import { ReloadOutlined } from "@ant-design/icons";
+import { IconReloadInvertido } from "@/components/IconReloadInvertido.jsx";
 
 export function FiltroCollapse({ campos = [], aoLimparFiltros, aoPesquisar, filtroInicial = {} }) {
     return (
@@ -13,7 +15,7 @@ export function FiltroCollapse({ campos = [], aoLimparFiltros, aoPesquisar, filt
                     }}
                     botaoLimparProps={{
                         texto: "Redefinir",
-                        icone: "reload",
+                        icone: <IconReloadInvertido />,
                         type: "danger",
                     }}
                     campos={campos}
