@@ -15,7 +15,7 @@ function LoginPage() {
     setLoading(true);
     try {
       await login(valores);
-      message.success('Bem-vindo ao Portal de Gestão Escolar!');
+      message.success('Bem-vindo a plataforma!');
       navigate('/dashboard', { replace: true });
     } catch (error) {
       message.error('Erro ao autenticar. Tente novamente.');

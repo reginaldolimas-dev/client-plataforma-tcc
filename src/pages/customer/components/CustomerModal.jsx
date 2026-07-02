@@ -1,41 +1,34 @@
 import { ModalCore } from "@/components/ModalCore.jsx";
 import { Formulario } from "@/components/Formulario/Formulario.jsx";
+import { message } from "antd";
+import { CUSTOMER_CAMPOS_MODAL } from "@/pages/customer/constants/customerConstants.jsx";
+import customerService from "@/services/customerService.js";
+import { useState } from "react";
 
-export function CustomerModal({visivel, aoFechar}) {
+export function CustomerModal({ visivel, aoFechar, aoSucesso }) {
 
-  const CAMPOS = [
-    {
-      key: 'name',
-      label: 'Nome',
-      tipo: 'input',
-      obrigatorio: true,
-      propriedades: { placeholder: 'Digite seu nome' },
-    },
-    {
-      key: 'surname',
-      label: 'Sobre nome',
-      tipo: 'input',
-      obrigatorio: true,
-      propriedades: { placeholder: 'Digite seu sobre nome' },
-    },
-    {
-      key: 'email',
-      label: 'E-mail',
-      tipo: 'input',
-      obrigatorio: true,
-      propriedades: { placeholder: 'Digite seu sobre nome' },
-    },
-    {
-      key: 'birthdate',
-      label: 'Data de Nascimento',
-      tipo: 'datepicker',
-      propriedades: { format: 'DD/MM/YYYY'}
+  const [carregando, setCarregando] = useState(false);
+
+
+  async function aoEnviar (valores){
+    try {
+      setCarregando(true);
+      const resposta = await customerService.criar(valores);
+      message.success('Cliente cadastrado com sucesso!');
+      if (aoSucesso) {
+        aoSucesso();
+      }
+      aoFechar();
+    } catch (e) {
+      console.error("Erro ao salvar cliente", e);
+    } finally {
+      setCarregando(false);
     }
-  ]
+  };
 
   return (
     <ModalCore titulo="Novo Cliente" visible={visivel} onClose={aoFechar} exibirFooter={null}>
-      <Formulario campos={CAMPOS} />
+      <Formulario campos={CUSTOMER_CAMPOS_MODAL} aoEnviar={aoEnviar} carregando={carregando} />
     </ModalCore>
-  )
+  );
 }
