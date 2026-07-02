@@ -3,7 +3,7 @@ import { Tabela } from "@/components/Tabela.jsx";
 import { Button, Col, Row } from "antd";
 import { Pagina } from "@/components/Layout/Pagina.jsx";
 import { CustomerModal } from "@/pages/customer/components/CustomerModal.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CUSTOMER_CAMPOS, CUSTOMER_COLUNAS } from "@/pages/customer/constants/customerConstants.jsx";
 import customerService from "@/services/customerService.js";
 
@@ -11,6 +11,10 @@ function CustomerPage() {
     const [isModalVisible, setModalVisible] = useState(false);
     const [carregando, setCarregando] = useState(false);
     const [resultado, setResultado] = useState([]);
+
+    useEffect(() => {
+        aoPesquisar({});
+    },[]);
 
     async function aoPesquisar (filtros){
         try {
