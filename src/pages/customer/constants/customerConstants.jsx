@@ -1,4 +1,6 @@
 import { Data } from "@/components/Data.jsx";
+import { IconCore } from "@/components/IconCore.jsx";
+import { ButtonIconCore } from "@/components/ButtonIconCore.jsx";
 
 export const CUSTOMER_COLUNAS = [
   {
@@ -21,6 +23,17 @@ export const CUSTOMER_COLUNAS = [
     dataIndex: 'birthDate',
     key: 'birthDate',
     render: (valor) => <Data valor={valor} />
+  },
+  {
+    title: "Ações",
+    key: "acoes",
+    render: (text, record) => (
+      <div style={{ display: "flex", gap: "8px" }}>
+        <ButtonIconCore title={"Editar"} type={"primary"} icon="fa FaEdit" />
+        <ButtonIconCore title={"Ativar"} color={"green"} variant="solid" icon="gr GrLike" />
+        <ButtonIconCore title={"Inativar"} type={"primary"} danger icon="gr GrDislike" />
+      </div>
+    ),
   }
 ];
 
