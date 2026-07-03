@@ -1,4 +1,10 @@
 import { Data } from "@/components/Data.jsx";
+import { Tag } from "antd";
+
+const COR_STATUS = {
+  true: { cor: "green", valor: "Sim" },
+  false: { cor: "red", valor: "Não" },
+};
 
 export const CUSTOMER_COLUNAS = [
   {
@@ -21,6 +27,12 @@ export const CUSTOMER_COLUNAS = [
     dataIndex: "birthDate",
     key: "birthDate",
     render: (valor) => <Data valor={valor} />,
+  },
+  {
+    title: "Ativo",
+    dataIndex: "active",
+    key: "active",
+    render: (valor) => <Tag color={COR_STATUS[valor].cor}>{COR_STATUS[valor].valor}</Tag>,
   },
 ];
 
