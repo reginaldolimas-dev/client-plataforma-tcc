@@ -5,12 +5,12 @@ import { Tabela } from "@/components/Tabela.jsx";
 import { Paginacao } from "@/components/Paginacao.jsx";
 import { CustomerModal } from "@/pages/customer/components/CustomerModal.jsx";
 import { PRODUCT_CAMPOS, PRODUCT_COLUNAS } from "@/pages/product/constants/productContants.jsx";
-import customerService from "@/services/customerService.js";
 import { FILTRO_INICIAL } from "@/constants/constUtils.js";
 import { ButtonIconCore } from "@/components/core/ButtonIconCore.jsx";
 import { RenderizaCaso } from "@/components/RenderizaCaso.jsx";
 import { modalFuncaoConfirmacao } from "@/components/core/ModalFuncaoCore.jsx";
 import { useState } from "react";
+import productService from "@/services/productService.js";
 
 export function ProductPage() {
   const [resultado, setResultado] = useState([]);
@@ -25,7 +25,7 @@ export function ProductPage() {
       setFiltro(filtros);
       setCarregando(true);
 
-      const resposta = await customerService.listar({ ...filtroInicial, ...filtros });
+      const resposta = await productService.listar({ ...FILTRO_INICIAL, ...filtros });
 
       setResultado(resposta?.data?.content);
       setPaginacao({
