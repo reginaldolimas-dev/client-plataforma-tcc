@@ -30,11 +30,11 @@ function CustomerPage() {
 
       const resposta = await customerService.listar({ ...filtroInicial, ...filtros });
 
-      setResultado(resposta?.content);
+      setResultado(resposta?.data?.content);
       setPaginacao({
-        currentPage: resposta?.number + 1,
-        total: resposta?.totalElements,
-        size: resposta?.size,
+        currentPage: resposta?.data?.number + 1,
+        total: resposta?.data?.totalElements,
+        size: resposta?.data?.size,
       });
     } catch (e) {
       console.error("Erro ao listar clientes", e);
