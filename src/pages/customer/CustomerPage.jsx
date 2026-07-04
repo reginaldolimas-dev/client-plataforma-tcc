@@ -9,12 +9,14 @@ import customerService from "@/services/customerService.js";
 import { ButtonIconCore } from "@/components/ButtonIconCore.jsx";
 import { RenderizaCaso } from "@/components/RenderizaCaso.jsx";
 import { modalFuncaoConfirmacao } from "@/components/core/ModalFuncaoCore.jsx";
+import { Paginacao } from "@/components/Paginacao.jsx";
 
 function CustomerPage() {
   const [isModalVisible, setModalVisible] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const [resultado, setResultado] = useState([]);
   const [registro, setRegistro] = useState({});
+  const [paginacao, setPaginacao] = useState({});
 
   useEffect(() => {
     aoPesquisar({});
@@ -24,9 +26,14 @@ function CustomerPage() {
     try {
       setCarregando(true);
 
-      const resposta = await customerService.listar(filtros);
+      const resposta = await customerService.listar({ ...filtroInicial, ...filtros });
 
       setResultado(resposta?.content);
+      setPaginacao({
+        currentPage: resposta?.number + 1,
+        total: resposta?.totalElements,
+        size: resposta?.size,
+      });
     } catch (e) {
       console.error("Erro ao listar clientes", e);
     } finally {
@@ -118,7 +125,14 @@ function CustomerPage() {
 
   const filtroInicial = {
     active: true,
+    page: 0,
+    size: 10,
   };
+
+  async function aoMudarPagina(pagina) {
+    const paginaAtual = pagina - 1;
+    await aoPesquisar({ ...filtroInicial, page: paginaAtual });
+  }
 
   return (
     <Pagina
@@ -135,6 +149,9 @@ function CustomerPage() {
         </Col>
         <Col span={24}>
           <Tabela dados={resultado} loading={carregando} colunas={[...CUSTOMER_COLUNAS, ...COLUNA_ACOES]} />
+        </Col>
+        <Col span={24}>
+          <Paginacao paginacao={paginacao} aoMudarPagina={aoMudarPagina} />
         </Col>
       </Row>
       <CustomerModal visivel={isModalVisible} aoFechar={aoFechar} aoSucesso={recarregar} registro={registro} />
