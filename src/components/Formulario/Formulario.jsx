@@ -71,6 +71,8 @@ const FormularioDecorator = forwardRef(
       exibirBotaoLimpar = true,
       form: formExterno,
       aoAtualizarValores,
+      botaoLimparProps,
+      botaoEnviarProps,
       ...rest
     },
     ref

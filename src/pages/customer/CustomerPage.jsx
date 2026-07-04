@@ -132,7 +132,6 @@ function CustomerPage() {
   };
 
   async function aoMudarPagina(pagina) {
-    console.log(filtro);
     const paginaAtual = pagina - 1;
     await aoPesquisar({ ...filtroInicial, ...filtro, page: paginaAtual });
   }
