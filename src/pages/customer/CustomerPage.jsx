@@ -14,6 +14,7 @@ function CustomerPage() {
   const [isModalVisible, setModalVisible] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const [resultado, setResultado] = useState([]);
+  const [registro, setRegistro] = useState({});
 
   useEffect(() => {
     aoPesquisar({});
@@ -35,10 +36,12 @@ function CustomerPage() {
 
   function recarregar() {
     aoPesquisar(filtroInicial);
+    setRegistro({});
   }
 
   function aoFechar() {
     setModalVisible(false);
+    setRegistro(null);
   }
 
   async function aoInativar(clienteId) {
@@ -66,13 +69,18 @@ function CustomerPage() {
     }
   }
 
+  function aoEditar(cliente) {
+    setRegistro(cliente);
+    setModalVisible(true);
+  }
+
   const COLUNA_ACOES = [
     {
       title: "Ações",
       key: "acoes",
       render: (text, record) => (
         <div style={{ display: "flex", gap: "8px" }}>
-          <ButtonIconCore title={"Editar"} type={"primary"} icon="fa FaEdit" />
+          <ButtonIconCore title={"Editar"} type={"primary"} icon="fa FaEdit" onClick={() => aoEditar(record)} />
           <RenderizaCaso caso={!record.active}>
             <ButtonIconCore
               title={"Ativar"}
@@ -129,7 +137,7 @@ function CustomerPage() {
           <Tabela dados={resultado} loading={carregando} colunas={[...CUSTOMER_COLUNAS, ...COLUNA_ACOES]} />
         </Col>
       </Row>
-      <CustomerModal visivel={isModalVisible} aoFechar={aoFechar} aoSucesso={recarregar} />
+      <CustomerModal visivel={isModalVisible} aoFechar={aoFechar} aoSucesso={recarregar} registro={registro} />
     </Pagina>
   );
 }

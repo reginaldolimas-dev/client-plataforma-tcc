@@ -1,5 +1,6 @@
 import { Data } from "@/components/Data.jsx";
 import { Tag } from "antd";
+import dayjs from "dayjs";
 
 const COR_STATUS = {
   true: { cor: "green", valor: "Sim" },
@@ -81,6 +82,12 @@ export const CUSTOMER_CAMPOS_MODAL = [
     key: "birthDate",
     label: "Data de Nascimento",
     tipo: "datepicker",
+    formatarEntrada: (valor) => dayjs(valor),
     propriedades: { format: "DD/MM/YYYY" },
+  },
+  {
+    key: "active",
+    label: "Ativo",
+    tipo: "switch",
   },
 ];

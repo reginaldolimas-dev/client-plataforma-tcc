@@ -7,10 +7,11 @@ const isFalsy = (val) => val == null || val === false || val === "" || val === 0
 const isTruthy = (val) => !isFalsy(val);
 
 const pegarValorInicial = (campo, valoresIniciais) => {
-  if (valoresIniciais && campo?.key in valoresIniciais) {
-    return valoresIniciais[campo.key];
-  }
-  return campo?.valorInicial;
+  const valor = valoresIniciais && campo?.key in valoresIniciais ? valoresIniciais[campo.key] : campo?.valorInicial;
+
+  if (!campo.formatarEntrada || valor == null || valor === "") return valor;
+
+  return campo.formatarEntrada(valor);
 };
 
 const formatarValoresFinais = (campos, valores) => {

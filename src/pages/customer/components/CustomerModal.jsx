@@ -5,30 +5,46 @@ import { CUSTOMER_CAMPOS_MODAL } from "@/pages/customer/constants/customerConsta
 import customerService from "@/services/customerService.js";
 import { useState } from "react";
 
-export function CustomerModal({ visivel, aoFechar, aoSucesso }) {
-
+export function CustomerModal({ visivel, aoFechar, aoSucesso, registro, aoLimpar }) {
   const [carregando, setCarregando] = useState(false);
 
+  const isEdit = !!registro?.id;
 
-  async function aoEnviar (valores){
+  async function aoEnviar(valores) {
     try {
       setCarregando(true);
-      const resposta = await customerService.criar(valores);
-      message.success('Cliente cadastrado com sucesso!');
-      if (aoSucesso) {
-        aoSucesso();
+      if (isEdit) {
+        await customerService.update(registro?.id, valores);
+      } else {
+        await customerService.criar(valores);
       }
+
+      message.success(isEdit ? "Cliente atualizado com sucesso!" : "Cliente criado com sucesso!");
+
+      aoSucesso?.();
       aoFechar();
     } catch (e) {
       console.error("Erro ao salvar cliente", e);
     } finally {
       setCarregando(false);
     }
-  };
+  }
 
   return (
-    <ModalCore titulo="Novo Cliente" visible={visivel} onClose={aoFechar} exibirFooter={null}>
-      <Formulario campos={CUSTOMER_CAMPOS_MODAL} aoEnviar={aoEnviar} carregando={carregando} />
+    <ModalCore
+      visible={visivel}
+      titulo={registro?.id ? "Editar Cliente" : "Novo Cliente"}
+      onClose={aoFechar}
+      exibirFooter={null}
+    >
+      <Formulario
+        campos={CUSTOMER_CAMPOS_MODAL}
+        aoEnviar={aoEnviar}
+        carregando={carregando}
+        valoresIniciais={registro || { active: true }}
+        aoLimpar={aoLimpar}
+        desabilitarBotaoLimpar={isEdit}
+      />
     </ModalCore>
   );
 }
