@@ -6,10 +6,10 @@ import { CustomerModal } from "@/pages/customer/components/CustomerModal.jsx";
 import { useEffect, useState } from "react";
 import { CUSTOMER_CAMPOS, CUSTOMER_COLUNAS } from "@/pages/customer/constants/customerConstants.jsx";
 import customerService from "@/services/customerService.js";
-import { ButtonIconCore } from "@/components/ButtonIconCore.jsx";
 import { RenderizaCaso } from "@/components/RenderizaCaso.jsx";
 import { modalFuncaoConfirmacao } from "@/components/core/ModalFuncaoCore.jsx";
 import { Paginacao } from "@/components/Paginacao.jsx";
+import { ButtonIconCore } from "@/components/core/ButtonIconCore.jsx";
 
 function CustomerPage() {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -17,6 +17,7 @@ function CustomerPage() {
   const [resultado, setResultado] = useState([]);
   const [registro, setRegistro] = useState({});
   const [paginacao, setPaginacao] = useState({});
+  const [filtro, setFiltro] = useState({});
 
   useEffect(() => {
     aoPesquisar({});
@@ -24,6 +25,7 @@ function CustomerPage() {
 
   async function aoPesquisar(filtros) {
     try {
+      setFiltro(filtros);
       setCarregando(true);
 
       const resposta = await customerService.listar({ ...filtroInicial, ...filtros });
@@ -130,8 +132,9 @@ function CustomerPage() {
   };
 
   async function aoMudarPagina(pagina) {
+    console.log(filtro);
     const paginaAtual = pagina - 1;
-    await aoPesquisar({ ...filtroInicial, page: paginaAtual });
+    await aoPesquisar({ ...filtroInicial, ...filtro, page: paginaAtual });
   }
 
   return (

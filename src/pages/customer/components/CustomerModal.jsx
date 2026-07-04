@@ -1,9 +1,9 @@
-import { ModalCore } from "@/components/ModalCore.jsx";
 import { Formulario } from "@/components/Formulario/Formulario.jsx";
 import { message } from "antd";
 import { CUSTOMER_CAMPOS_MODAL } from "@/pages/customer/constants/customerConstants.jsx";
 import customerService from "@/services/customerService.js";
 import { useState } from "react";
+import { ModalCore } from "@/components/core/ModalCore.jsx";
 
 export function CustomerModal({ visivel, aoFechar, aoSucesso, registro, aoLimpar }) {
   const [carregando, setCarregando] = useState(false);
