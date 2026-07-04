@@ -1,7 +1,6 @@
 import { Pagination } from "antd";
 
 export function Paginacao({ paginacao, aoMudarPagina }) {
-  console.log(paginacao);
   return (
     <div style={{ display: "flex", justifyContent: "right", marginTop: "16px" }}>
       <Pagination
