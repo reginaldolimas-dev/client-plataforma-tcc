@@ -1,0 +1,122 @@
+import { Pagina } from "@/components/Layout/Pagina.jsx";
+import { Button, Col, Row } from "antd";
+import { FiltroCollapse } from "@/components/FiltroCollapse.jsx";
+import { Tabela } from "@/components/Tabela.jsx";
+import { Paginacao } from "@/components/Paginacao.jsx";
+import { CustomerModal } from "@/pages/customer/components/CustomerModal.jsx";
+import { PRODUCT_CAMPOS, PRODUCT_COLUNAS } from "@/pages/product/constants/productContants.jsx";
+import customerService from "@/services/customerService.js";
+import { FILTRO_INICIAL } from "@/constants/constUtils.js";
+import { ButtonIconCore } from "@/components/core/ButtonIconCore.jsx";
+import { RenderizaCaso } from "@/components/RenderizaCaso.jsx";
+import { modalFuncaoConfirmacao } from "@/components/core/ModalFuncaoCore.jsx";
+import { useState } from "react";
+
+export function ProductPage() {
+  const [resultado, setResultado] = useState([]);
+  const [carregando, setCarregando] = useState(false);
+  const [paginacao, setPaginacao] = useState({});
+  const [filtro, setFiltro] = useState({});
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [registro, setRegistro] = useState({});
+
+  async function aoPesquisar(filtros) {
+    try {
+      setFiltro(filtros);
+      setCarregando(true);
+
+      const resposta = await customerService.listar({ ...filtroInicial, ...filtros });
+
+      setResultado(resposta?.data?.content);
+      setPaginacao({
+        currentPage: resposta?.data?.number + 1,
+        total: resposta?.data?.totalElements,
+        size: resposta?.data?.size,
+      });
+    } catch (e) {
+      console.error("Erro ao listar clientes", e);
+    } finally {
+      setCarregando(false);
+    }
+  }
+
+  async function aoMudarPagina(pagina) {
+    const paginaAtual = pagina - 1;
+    await aoPesquisar({ ...filtro, page: paginaAtual });
+  }
+
+  function aoFechar() {
+    setModalVisible(false);
+    aoPesquisar(filtro);
+  }
+
+  function recarregar() {
+    aoPesquisar(filtro);
+  }
+
+  const COLUNA_ACOES = [
+    {
+      title: "Ações",
+      key: "acoes",
+      render: (text, record) => (
+        <div style={{ display: "flex", gap: "8px" }}>
+          <ButtonIconCore title={"Editar"} type={"primary"} icon="fa FaEdit" onClick={() => aoEditar(record)} />
+          <RenderizaCaso caso={!record.active}>
+            <ButtonIconCore
+              title={"Ativar"}
+              color={"green"}
+              variant="solid"
+              icon="gr GrLike"
+              onClick={() =>
+                modalFuncaoConfirmacao({
+                  title: "Ativar Cliente",
+                  content: "Tem certeza que deseja ativar este cliente?",
+                  onOk: () => aoAtivar(record.id),
+                })
+              }
+            />
+          </RenderizaCaso>
+          <RenderizaCaso caso={record.active}>
+            <ButtonIconCore
+              title={"Inativar"}
+              type={"primary"}
+              danger
+              icon="gr GrDislike"
+              onClick={() =>
+                modalFuncaoConfirmacao({
+                  title: "Inativar Cliente",
+                  content: "Tem certeza que deseja inativar este cliente?",
+                  onOk: () => aoInativar(record.id),
+                })
+              }
+            />
+          </RenderizaCaso>
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <Pagina
+      titulo="Pesquisa de Produtos"
+      acoes={
+        <Button onClick={() => setModalVisible(true)} type={"primary"}>
+          Novo Produto
+        </Button>
+      }
+    >
+      <Row gutter={[32, 32]}>
+        <Col span={24}>
+          <FiltroCollapse campos={PRODUCT_CAMPOS} aoPesquisar={aoPesquisar} filtroInicial={FILTRO_INICIAL} />
+        </Col>
+        <Col span={24}>
+          <Tabela dados={resultado} loading={carregando} colunas={[...PRODUCT_COLUNAS, ...COLUNA_ACOES]} />
+        </Col>
+        <Col span={24}>
+          <Paginacao paginacao={paginacao} aoMudarPagina={aoMudarPagina} />
+        </Col>
+      </Row>
+      <CustomerModal visivel={isModalVisible} aoFechar={aoFechar} aoSucesso={recarregar} registro={registro} />
+    </Pagina>
+  );
+}
