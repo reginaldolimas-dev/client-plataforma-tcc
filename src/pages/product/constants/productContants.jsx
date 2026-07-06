@@ -1,4 +1,3 @@
-import { Data } from "@/components/Data.jsx";
 import { Tag } from "antd";
 
 export const PRODUCT_CAMPOS = [
@@ -15,6 +14,11 @@ export const PRODUCT_CAMPOS = [
   },
 ];
 
+const COR_STATUS = {
+  true: { cor: "green", valor: "Sim" },
+  false: { cor: "red", valor: "Não" },
+};
+
 export const PRODUCT_COLUNAS = [
   {
     title: "Nome",
@@ -22,25 +26,24 @@ export const PRODUCT_COLUNAS = [
     key: "name",
   },
   {
-    title: "Sobrenome",
-    dataIndex: "surname",
-    key: "surname",
+    title: "Descrição",
+    dataIndex: "description",
+    key: "description",
   },
   {
-    title: "E-mail",
-    dataIndex: "email",
-    key: "email",
+    title: "Preço",
+    dataIndex: "price",
+    key: "price",
   },
   {
-    title: "Data de Nascimento",
-    dataIndex: "birthDate",
-    key: "birthDate",
-    render: (valor) => <Data valor={valor} />,
+    title: "Quantidade",
+    dataIndex: "quantity",
+    key: "quantity",
   },
   {
     title: "Ativo",
     dataIndex: "active",
     key: "active",
-    render: (valor) => <Tag color={COR_STATUS[valor].cor}>{COR_STATUS[valor].valor}</Tag>,
+    render: (valor) => <Tag color={COR_STATUS[valor]?.cor}>{COR_STATUS[valor]?.valor}</Tag>,
   },
 ];
