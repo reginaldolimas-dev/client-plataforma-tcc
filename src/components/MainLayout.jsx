@@ -3,12 +3,13 @@ import { Avatar, Button, Dropdown, Layout, Menu, theme } from "antd";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   BookOutlined,
-  CalendarOutlined,
   DashboardOutlined,
+  DollarOutlined,
+  FileTextOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  SettingOutlined,
+  ShoppingOutlined,
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
@@ -29,18 +30,18 @@ const itensMenu = [
   },
   {
     key: "/produtos",
-    icon: <BookOutlined />,
+    icon: <ShoppingOutlined />,
     label: "Produtos",
   },
   {
-    key: "/calendario",
-    icon: <CalendarOutlined />,
-    label: "Calendário Letivo",
+    key: "/cotacoes",
+    icon: <FileTextOutlined />,
+    label: "Cotações",
   },
   {
-    key: "/configuracoes",
-    icon: <SettingOutlined />,
-    label: "Configurações",
+    key: "/vendas",
+    icon: <DollarOutlined />,
+    label: "Vendas",
   },
 ];
 

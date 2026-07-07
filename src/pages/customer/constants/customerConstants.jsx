@@ -14,7 +14,7 @@ export const CUSTOMER_COLUNAS = [
     key: "name",
   },
   {
-    title: "Sobrenome",
+    title: "Sobre Nome",
     dataIndex: "surname",
     key: "surname",
   },

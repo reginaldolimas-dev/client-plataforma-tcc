@@ -5,6 +5,7 @@ import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/DashboardPage";
 import CustomerPage from "@/pages/customer/CustomerPage.jsx";
 import { ProductPage } from "@/pages/product/ProductPage.jsx";
+import { CurrencyPage } from "@/pages/currency/CurrencyPage.jsx";
 
 function AppRoutes() {
   return (
@@ -15,6 +16,7 @@ function AppRoutes() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/clientes" element={<CustomerPage />} />
           <Route path="/produtos" element={<ProductPage />} />
+          <Route path="/cotacoes" element={<CurrencyPage />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
