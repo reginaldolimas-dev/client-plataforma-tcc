@@ -8,7 +8,7 @@ import { FILTRO_INICIAL } from "@/constants/constUtils.js";
 import { ButtonIconCore } from "@/components/core/ButtonIconCore.jsx";
 import { RenderizaCaso } from "@/components/RenderizaCaso.jsx";
 import { modalFuncaoConfirmacao } from "@/components/core/ModalFuncaoCore.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import productService from "@/services/productService.js";
 import { ProductModal } from "@/pages/product/components/ProductModal.jsx";
 
@@ -19,6 +19,10 @@ export function ProductPage() {
   const [filtro, setFiltro] = useState({});
   const [isModalVisible, setModalVisible] = useState(false);
   const [registro, setRegistro] = useState({});
+
+  useEffect(() => {
+    aoPesquisar(FILTRO_INICIAL);
+  }, []);
 
   async function aoPesquisar(filtros) {
     try {
