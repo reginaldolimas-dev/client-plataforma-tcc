@@ -1,5 +1,5 @@
 import { Pagina } from "@/components/Layout/Pagina.jsx";
-import { Button, Col, Row } from "antd";
+import { Button, Col, message, Row } from "antd";
 import { FiltroCollapse } from "@/components/FiltroCollapse.jsx";
 import { Tabela } from "@/components/Tabela.jsx";
 import { Paginacao } from "@/components/Paginacao.jsx";
@@ -58,6 +58,30 @@ export function ProductPage() {
   function aoEditar(produto) {
     setRegistro(produto);
     setModalVisible(true);
+  }
+
+  async function aoInativar(produtoId) {
+    try {
+      setCarregando(true);
+      await productService.inativar(produtoId);
+      message.success("Produto inativado com sucesso!");
+      recarregar();
+    } catch (e) {
+      console.error("Erro ao inativar cliente", e);
+    } finally {
+      setCarregando(false);
+    }
+  }
+
+  async function aoAtivar(produtoId) {
+    try {
+      await productService.update(produtoId, { active: true });
+      message.success("Produto ativado com sucesso!");
+      recarregar();
+    } catch (e) {
+      console.error("Erro ao ativar cliente", e);
+    } finally {
+    }
   }
 
   const COLUNA_ACOES = [

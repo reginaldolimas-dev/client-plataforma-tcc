@@ -17,6 +17,7 @@ async function inativar(id) {
 
 async function update(id, params) {
   const response = await productApi.put(`/products/${id}`, params);
+  return response.data;
 }
 
 const customerService = { listar, criar, inativar, update };

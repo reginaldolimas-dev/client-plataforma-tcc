@@ -1,4 +1,5 @@
 import { Tag } from "antd";
+import { PriceCell } from "@/pages/product/components/PriceCell.jsx";
 
 export const PRODUCT_CAMPOS = [
   {
@@ -34,6 +35,7 @@ export const PRODUCT_COLUNAS = [
     title: "Preço",
     dataIndex: "price",
     key: "price",
+    render: (price, record) => <PriceCell price={price} conversions={record?.pricesInOtherCurrencies} />,
   },
   {
     title: "Quantidade",
