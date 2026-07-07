@@ -4,4 +4,4 @@ export const FILTRO_INICIAL = {
   size: 10,
 };
 
-
+export const DATA_HORA_FORMATO = "DD/MM/YYYY HH:mm:ss";

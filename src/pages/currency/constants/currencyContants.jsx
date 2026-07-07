@@ -1,3 +1,6 @@
+import { Data } from "@/components/Data.jsx";
+import { DATA_HORA_FORMATO } from "@/constants/constUtils.js";
+
 const MOEDAS = [
   { value: "USD", label: "USD" },
   { value: "EUR", label: "EUR" },
@@ -30,5 +33,6 @@ export const CURRENCY_COLUNAS = [
     title: "Atualizado em",
     dataIndex: "updatedAt",
     key: "updatedAt",
+    render: (data) => <Data valor={data} formato={DATA_HORA_FORMATO} />,
   },
 ];
