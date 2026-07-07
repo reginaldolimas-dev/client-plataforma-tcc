@@ -1,7 +1,9 @@
 import { Popover } from "antd";
+import { useRef } from "react";
 import ButtonCore from "@/components/core/ButtonCore.jsx";
 
 export function PriceCell({ price, conversions }) {
+  const buttonRef = useRef(null);
   const currencyConfig = {
     BRL: { locale: "pt-BR", currency: "BRL", flag: "🇧🇷" },
     USD: { locale: "en-US", currency: "USD", flag: "🇺🇸" },
@@ -42,9 +44,11 @@ export function PriceCell({ price, conversions }) {
 
   return (
     <Popover content={content} title="Preço em outras moedas" trigger="hover">
-      <ButtonCore type="link" style={{ padding: 0, fontWeight: 500 }}>
-        {formatCurrency(price, "BRL")}
-      </ButtonCore>
+      <div ref={buttonRef}>
+        <ButtonCore type="link" style={{ padding: 0, fontWeight: 500 }}>
+          {formatCurrency(price, "BRL")}
+        </ButtonCore>
+      </div>
     </Popover>
   );
 }
