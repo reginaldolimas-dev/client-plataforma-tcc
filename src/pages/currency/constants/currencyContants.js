@@ -1,41 +1,34 @@
-import { Tag } from "antd";
-import { PriceCell } from "@/pages/product/components/PriceCell.jsx";
+const MOEDAS = [
+  { value: "USD", label: "USD" },
+  { value: "EUR", label: "EUR" },
+  { value: "BRL", label: "BRL" },
+  { value: "CNY", label: "CNY" },
+  { value: "GBP", label: "GBP" },
+];
 
 export const CURRENCY_CAMPOS = [
   {
-    key: "name",
-    label: "Nome",
-    tipo: "input",
-    propriedades: { placeholder: "Digite o nome do produto" },
+    key: "code",
+    label: "Código",
+    tipo: "select",
+    propriedades: { placeholder: "Selecione a moeda", options: MOEDAS },
   },
 ];
 
 export const CURRENCY_COLUNAS = [
   {
-    title: "Nome",
-    dataIndex: "name",
-    key: "name",
+    title: "Código",
+    dataIndex: "code",
+    key: "code",
   },
   {
-    title: "Descrição",
-    dataIndex: "description",
-    key: "description",
+    title: "Valor",
+    dataIndex: "value",
+    key: "value",
   },
   {
-    title: "Preço",
-    dataIndex: "price",
-    key: "price",
-    render: (price, record) => <PriceCell price={price} conversions={record?.pricesInOtherCurrencies} />,
-  },
-  {
-    title: "Quantidade",
-    dataIndex: "quantity",
-    key: "quantity",
-  },
-  {
-    title: "Ativo",
-    dataIndex: "active",
-    key: "active",
-    render: (valor) => <Tag color={COR_STATUS[valor]?.cor}>{COR_STATUS[valor]?.valor}</Tag>,
+    title: "Atualizado em",
+    dataIndex: "updatedAt",
+    key: "updatedAt",
   },
 ];

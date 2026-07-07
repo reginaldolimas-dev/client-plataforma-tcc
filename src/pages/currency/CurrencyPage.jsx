@@ -8,14 +8,13 @@ import { ButtonIconCore } from "@/components/core/ButtonIconCore.jsx";
 import { RenderizaCaso } from "@/components/RenderizaCaso.jsx";
 import { modalFuncaoConfirmacao } from "@/components/core/ModalFuncaoCore.jsx";
 import { useEffect, useState } from "react";
-import productService from "@/services/productService.js";
 import { CURRENCY_CAMPOS, CURRENCY_COLUNAS } from "@/pages/currency/constants/currencyContants.js";
+import currencyService from "@/services/currencyService.js";
 
 export function CurrencyPage() {
   const [resultado, setResultado] = useState([]);
   const [carregando, setCarregando] = useState(false);
   const [paginacao, setPaginacao] = useState({});
-  const [filtro, setFiltro] = useState({});
 
   useEffect(() => {
     aoPesquisar(FILTRO_INICIAL);
@@ -23,10 +22,9 @@ export function CurrencyPage() {
 
   async function aoPesquisar(filtros) {
     try {
-      setFiltro(filtros);
       setCarregando(true);
 
-      const resposta = await productService.listar({ ...FILTRO_INICIAL, ...filtros });
+      const resposta = await currencyService.listar();
 
       setResultado(resposta?.data?.content);
       setPaginacao({
