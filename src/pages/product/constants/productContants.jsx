@@ -47,3 +47,39 @@ export const PRODUCT_COLUNAS = [
     render: (valor) => <Tag color={COR_STATUS[valor]?.cor}>{COR_STATUS[valor]?.valor}</Tag>,
   },
 ];
+
+export const PRODUCT_CAMPOS_MODAL = [
+  {
+    key: "name",
+    label: "Nome",
+    tipo: "input",
+    obrigatorio: true,
+    propriedades: { placeholder: "Digite o nome do produto" },
+  },
+  {
+    key: "description",
+    label: "Descrição",
+    tipo: "input",
+    obrigatorio: true,
+    propriedades: { placeholder: "Digite a descrição do produto" },
+  },
+  {
+    key: "price",
+    label: "Preço",
+    tipo: "input",
+    obrigatorio: true,
+    propriedades: { placeholder: "Digite o preço do produto" },
+  },
+  {
+    key: "quantity",
+    label: "Quantidade",
+    tipo: "input",
+    obrigatorio: true,
+    propriedades: { placeholder: "Digite a quantidade do produto" },
+  },
+  {
+    key: "active",
+    label: "Ativo",
+    tipo: "switch",
+  },
+];

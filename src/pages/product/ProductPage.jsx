@@ -3,7 +3,6 @@ import { Button, Col, Row } from "antd";
 import { FiltroCollapse } from "@/components/FiltroCollapse.jsx";
 import { Tabela } from "@/components/Tabela.jsx";
 import { Paginacao } from "@/components/Paginacao.jsx";
-import { CustomerModal } from "@/pages/customer/components/CustomerModal.jsx";
 import { PRODUCT_CAMPOS, PRODUCT_COLUNAS } from "@/pages/product/constants/productContants.jsx";
 import { FILTRO_INICIAL } from "@/constants/constUtils.js";
 import { ButtonIconCore } from "@/components/core/ButtonIconCore.jsx";
@@ -11,6 +10,7 @@ import { RenderizaCaso } from "@/components/RenderizaCaso.jsx";
 import { modalFuncaoConfirmacao } from "@/components/core/ModalFuncaoCore.jsx";
 import { useState } from "react";
 import productService from "@/services/productService.js";
+import { ProductModal } from "@/pages/product/components/ProductModal.jsx";
 
 export function ProductPage() {
   const [resultado, setResultado] = useState([]);
@@ -47,11 +47,17 @@ export function ProductPage() {
 
   function aoFechar() {
     setModalVisible(false);
+    setRegistro({});
     aoPesquisar(filtro);
   }
 
   function recarregar() {
     aoPesquisar(filtro);
+  }
+
+  function aoEditar(produto) {
+    setRegistro(produto);
+    setModalVisible(true);
   }
 
   const COLUNA_ACOES = [
@@ -116,7 +122,7 @@ export function ProductPage() {
           <Paginacao paginacao={paginacao} aoMudarPagina={aoMudarPagina} />
         </Col>
       </Row>
-      <CustomerModal visivel={isModalVisible} aoFechar={aoFechar} aoSucesso={recarregar} registro={registro} />
+      <ProductModal visivel={isModalVisible} aoFechar={aoFechar} aoSucesso={recarregar} registro={registro} />
     </Pagina>
   );
 }
