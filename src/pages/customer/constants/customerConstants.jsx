@@ -85,9 +85,4 @@ export const CUSTOMER_CAMPOS_MODAL = [
     formatarEntrada: (valor) => dayjs(valor),
     propriedades: { format: "DD/MM/YYYY" },
   },
-  {
-    key: "active",
-    label: "Ativo",
-    tipo: "switch",
-  },
 ];

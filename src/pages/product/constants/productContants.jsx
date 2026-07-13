@@ -70,18 +70,13 @@ export const PRODUCT_CAMPOS_MODAL = [
     label: "Preço",
     tipo: "input",
     obrigatorio: true,
-    propriedades: { placeholder: "Digite o preço do produto" },
+    propriedades: { placeholder: "Digite o preço do produto", type: "number", min: 0, step: 0.01 },
   },
   {
     key: "quantity",
     label: "Quantidade",
     tipo: "input",
     obrigatorio: true,
-    propriedades: { placeholder: "Digite a quantidade do produto" },
-  },
-  {
-    key: "active",
-    label: "Ativo",
-    tipo: "switch",
+    propriedades: { placeholder: "Digite a quantidade do produto", type: "number", min: 0 },
   },
 ];
