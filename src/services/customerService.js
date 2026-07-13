@@ -19,6 +19,11 @@ async function update(id, params) {
   const response = await customerApi.put(`/customers/${id}`, params);
 }
 
-const customerService = { listar, criar, inativar, update };
+async function contagem() {
+  const response = await customerApi.get("/customers/count");
+  return response.data;
+}
+
+const customerService = { listar, criar, inativar, update, contagem };
 
 export default customerService;

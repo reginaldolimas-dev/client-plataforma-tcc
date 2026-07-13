@@ -20,6 +20,11 @@ async function update(id, params) {
   return response.data;
 }
 
-const customerService = { listar, criar, inativar, update };
+async function contagem() {
+  const response = await productApi.get("/products/count");
+  return response.data;
+}
+
+const customerService = { listar, criar, inativar, update, contagem };
 
 export default customerService;
