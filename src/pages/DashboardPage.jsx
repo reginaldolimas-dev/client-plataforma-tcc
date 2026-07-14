@@ -46,7 +46,7 @@ function DashboardPage() {
       <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
         <Col xs={24} sm={12} lg={6}>
           <CardEstatistica
-            titulo="Clientes Cadastrados"
+            titulo="Clientes"
             valor={totalClientes?.value || 0}
             icone={<TeamOutlined style={{ fontSize: 24, color: "#1890ff" }} />}
             cor="#1890ff"
@@ -54,7 +54,7 @@ function DashboardPage() {
         </Col>
         <Col xs={24} sm={12} lg={6}>
           <CardEstatistica
-            titulo="Produtos Cadastrados"
+            titulo="Produtos"
             valor={totalProdutos?.value || 0}
             icone={<ShoppingOutlined style={{ fontSize: 24, color: "#52c41a" }} />}
             cor="#52c41a"
